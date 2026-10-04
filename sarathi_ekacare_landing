@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sarathi — Connected family care</title>
+  <style>
+    :root{
+      --eka-green:#0F6B55;
+      --eka-green-dark:#0A4F3F;
+      --eka-mint:#EAF7F2;
+      --eka-mint-2:#F4FBF8;
+      --text:#18302A;
+      --muted:#5F746E;
+      --line:#DDEAE5;
+      --white:#FFFFFF;
+      --shadow:0 24px 60px rgba(15,107,85,.14);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 88% 14%, rgba(15,107,85,.10), transparent 26%),
+        linear-gradient(180deg,#FBFEFD 0%,#F4FAF7 100%);
+      overflow:hidden;
+    }
+    .page{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+    header{
+      height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 6vw;
+      border-bottom:1px solid rgba(221,234,229,.9);
+      background:rgba(255,255,255,.82);
+      backdrop-filter:blur(14px);
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      color:var(--eka-green-dark);
+      letter-spacing:-.02em;
+      font-size:22px;
+    }
+    .mark{
+      width:36px;height:36px;border-radius:12px;
+      display:grid;place-items:center;
+      background:var(--eka-green);
+      color:#fff;font-size:20px;
+      box-shadow:0 10px 22px rgba(15,107,85,.18);
+    }
+    .nav-actions{display:flex;align-items:center;gap:12px}
+    button{
+      font:inherit;
+      border:none;
+      cursor:pointer;
+    }
+    .ghost{
+      padding:10px 16px;
+      border-radius:10px;
+      background:transparent;
+      color:var(--eka-green-dark);
+      font-weight:700;
+    }
+    .primary{
+      padding:12px 18px;
+      border-radius:12px;
+      background:var(--eka-green);
+      color:#fff;
+      font-weight:800;
+      box-shadow:0 10px 24px rgba(15,107,85,.20);
+    }
+    main{
+      flex:1;
+      display:grid;
+      grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);
+      align-items:center;
+      gap:clamp(34px,6vw,90px);
+      padding:clamp(30px,4vw,54px) 7vw 42px;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:var(--eka-mint);
+      color:var(--eka-green-dark);
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.03em;
+      text-transform:uppercase;
+      margin-bottom:20px;
+    }
+    h1{
+      margin:0;
+      font-size:clamp(48px,6vw,78px);
+      line-height:.96;
+      letter-spacing:-.055em;
+      max-width:780px;
+      color:#112721;
+    }
+    h1 .accent{color:var(--eka-green)}
+    .lead{
+      margin:26px 0 16px;
+      max-width:720px;
+      font-size:clamp(18px,1.6vw,23px);
+      line-height:1.58;
+      color:var(--muted);
+    }
+    .sublead{
+      margin:0 0 30px;
+      font-size:17px;
+      font-weight:700;
+      color:#284940;
+    }
+    .cta-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+    .cta-row .primary{padding:15px 22px;font-size:16px}
+    .cta-row .secondary{
+      padding:14px 18px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--eka-green-dark);
+      font-weight:800;
+    }
+    .trust{
+      margin-top:24px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#55726A;
+      font-size:14px;
+      font-weight:650;
+    }
+    .trust-dot{
+      width:28px;height:28px;border-radius:50%;
+      display:grid;place-items:center;
+      background:var(--eka-mint);
+      color:var(--eka-green);
+      font-weight:900;
+    }
+    .visual{
+      position:relative;
+      min-height:520px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .orb{
+      position:absolute;
+      width:410px;height:410px;border-radius:50%;
+      background:linear-gradient(145deg,#DFF4EC 0%,#F7FCFA 70%);
+      filter:drop-shadow(0 32px 60px rgba(15,107,85,.10));
+    }
+    .card{
+      position:relative;
+      width:min(440px,90%);
+      background:rgba(255,255,255,.96);
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:30px;
+      box-shadow:var(--shadow);
+    }
+    .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+    .mini-brand{display:flex;align-items:center;gap:10px;font-weight:850;color:var(--eka-green-dark)}
+    .mini-icon{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:var(--eka-green);color:white}
+    .status{font-size:12px;font-weight:800;color:var(--eka-green);background:var(--eka-mint);padding:7px 10px;border-radius:999px}
+    .health-box{padding:18px;border-radius:18px;background:var(--eka-mint-2);border:1px solid #E4F2ED;margin-bottom:14px}
+    .health-box strong{display:block;font-size:14px;color:#315149;margin-bottom:6px}
+    .health-box span{font-size:14px;color:#647C75;line-height:1.45}
+    .timeline{margin-top:18px;border-top:1px solid #E8F0ED;padding-top:16px}
+    .item{display:flex;gap:12px;align-items:flex-start;margin:12px 0}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--eka-green);margin-top:6px;box-shadow:0 0 0 5px var(--eka-mint)}
+    .item b{font-size:14px;display:block;color:#29483F;margin-bottom:2px}
+    .item small{color:#72877F;font-size:12px}
+    footer{
+      padding:0 7vw 24px;
+      color:#70837D;
+      font-size:12px;
+    }
+
+    .modal-wrap{
+      position:fixed;inset:0;background:rgba(8,37,29,.45);
+      display:none;align-items:center;justify-content:center;padding:20px;z-index:10;
+    }
+    .modal-wrap.open{display:flex}
+    .modal{
+      width:min(430px,96vw);
+      background:#fff;border-radius:22px;padding:26px;
+      box-shadow:0 30px 80px rgba(0,0,0,.24);
+    }
+    .modal h2{margin:0 0 8px;font-size:28px;letter-spacing:-.03em}
+    .modal p{margin:0 0 20px;color:var(--muted);line-height:1.5}
+    .field{margin:12px 0}
+    label{display:block;font-size:13px;font-weight:800;margin-bottom:6px;color:#38564E}
+    input{
+      width:100%;padding:13px 14px;border-radius:12px;border:1px solid #D8E7E1;outline:none;font:inherit;
+    }
+    input:focus{border-color:var(--eka-green);box-shadow:0 0 0 3px rgba(15,107,85,.08)}
+    .modal-actions{display:flex;gap:10px;margin-top:18px}
+    .modal-actions button{flex:1}
+    .close{background:#F2F6F4;color:#38564E;padding:12px;border-radius:12px;font-weight:800}
+
+    @media (max-width: 900px){
+      body{overflow:auto}
+      main{grid-template-columns:1fr;padding-top:38px}
+      .visual{min-height:430px}
+      h1{font-size:clamp(46px,11vw,68px)}
+      header{padding:0 5vw}
+      footer{padding:0 5vw 20px}
+    }
+    @media (max-height: 760px) and (min-width: 901px){
+      header{height:64px}
+      main{padding-top:24px;padding-bottom:24px}
+      h1{font-size:58px}
+      .lead{margin:18px 0 12px;font-size:18px}
+      .visual{min-height:430px}
+      .orb{width:340px;height:340px}
+      .card{padding:24px}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand"><div class="mark">✦</div> Sarathi</div>
+      <div class="nav-actions">
+        <button class="ghost" onclick="openModal('signin')">Sign in</button>
+        <button class="primary" onclick="openModal('signup')">Create account</button>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div class="eyebrow">Connected family care</div>
+        <h1>Your family’s health, <span class="accent">connected when it matters.</span></h1>
+        <p class="lead">Keep your health records organised, stay on top of important care tasks, and securely share selected information with the people you trust.</p>
+        <p class="sublead">Start with one health record. Build your health memory over time.</p>
+        <div class="cta-row">
+          <button class="primary" onclick="openModal('signup')">Create your Sarathi account</button>
+          <button class="secondary" onclick="openModal('signin')">Sign in</button>
+        </div>
+        <div class="trust"><div class="trust-dot">✓</div>Private. Permission based. Built for connected family care.</div>
+      </section>
+
+      <section class="visual" aria-label="Product preview">
+        <div class="orb"></div>
+        <div class="card">
+          <div class="card-top">
+            <div class="mini-brand"><div class="mini-icon">✦</div>Sarathi</div>
+            <div class="status">Secure profile</div>
+          </div>
+          <div class="health-box">
+            <strong>Your health timeline</strong>
+            <span>Keep prescriptions, reports and care tasks together in one organised view.</span>
+          </div>
+          <div class="health-box">
+            <strong>Share only when you choose</strong>
+            <span>Give trusted people access to selected information while keeping control of your profile.</span>
+          </div>
+          <div class="timeline">
+            <div class="item"><div class="dot"></div><div><b>Prescription added</b><small>Today · Saved to your timeline</small></div></div>
+            <div class="item"><div class="dot"></div><div><b>Care task created</b><small>Follow up is now easy to track</small></div></div>
+            <div class="item"><div class="dot"></div><div><b>Trusted access</b><small>Share selected records with permission</small></div></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>Designed as an Eka Care style concept experience for connected family health management.</footer>
+  </div>
+
+  <div id="modal" class="modal-wrap" role="dialog" aria-modal="true">
+    <div class="modal">
+      <h2 id="modalTitle">Create your Sarathi account</h2>
+      <p id="modalCopy">Start with one health record and build your health memory over time.</p>
+      <div class="field"><label>Full name</label><input id="nameField" type="text" placeholder="Your name"></div>
+      <div class="field"><label>Email or mobile number</label><input type="text" placeholder="you@example.com"></div>
+      <div class="field"><label>Password</label><input type="password" placeholder="Create a password"></div>
+      <div class="modal-actions">
+        <button class="close" onclick="closeModal()">Cancel</button>
+        <button class="primary" id="submitBtn" onclick="completeAction()">Create account</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let mode='signup';
+    function openModal(nextMode){
+      mode=nextMode;
+      const signup = mode==='signup';
+      document.getElementById('modalTitle').textContent = signup ? 'Create your Sarathi account' : 'Welcome back';
+      document.getElementById('modalCopy').textContent = signup ? 'Start with one health record and build your health memory over time.' : 'Sign in to continue to your health timeline.';
+      document.getElementById('submitBtn').textContent = signup ? 'Create account' : 'Sign in';
+      document.getElementById('nameField').parentElement.style.display = signup ? 'block' : 'none';
+      document.getElementById('modal').classList.add('open');
+    }
+    function closeModal(){document.getElementById('modal').classList.remove('open')}
+    function completeAction(){
+      alert(mode==='signup' ? 'Signup action triggered for demo.' : 'Sign in action triggered for demo.');
+      closeModal();
+    }
+    document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+  </script>
+</body>
+</html>
